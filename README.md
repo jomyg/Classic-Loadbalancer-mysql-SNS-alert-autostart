@@ -43,3 +43,28 @@ Enter password:
 |   14 | anand |
 +------+-------+
 ```
+Now we can Create a SNS alert on AWS account with one email subscription.
+Confirm the SNS email to validate the email with AWS. Copy the ARN of the SNS alert to configure the 
+
+
+#!/bin/bash
+
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+UP=$(service mariadb status | grep running | grep -v not | wc -l);
+host=`hostname`
+msg="Mysql service is down on the server ${host}"
+if [ "$UP" -ne 1 ];
+then
+        aws sns publish --topic-arn arn:aws:sns:ap-south-1:154613195738:mysql-alert --message "${msg}";
+        sudo service mariadb start
+        aws sns publish --topic-arn arn:aws:sns:ap-south-1:154613195738:mysql-alert --message "Mysql started again now!";
+else
+        echo "All is well.";
+fi
+
+[root@db2 ~]# crontab -l
+* * * * *       sh      sns.sh
+
+You need to setup the aws cli
