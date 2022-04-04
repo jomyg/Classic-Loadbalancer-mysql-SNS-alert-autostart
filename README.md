@@ -46,7 +46,7 @@ Enter password:
 Now we can Create a SNS alert on AWS account with one email subscription.
 Confirm the SNS email to validate the email with AWS. Copy the ARN of the SNS alert to configure the 
 
-
+```
 #!/bin/bash
 
 SHELL=/bin/bash
@@ -63,7 +63,7 @@ then
 else
         echo "All is well.";
 fi
-
+```
 [root@db2 ~]# crontab -l
 * * * * *       sh      sns.sh
 
