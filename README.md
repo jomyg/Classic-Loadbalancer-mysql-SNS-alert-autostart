@@ -64,7 +64,11 @@ else
         echo "All is well.";
 fi
 ```
+```
+This wil check every sec of mariadb status
 [root@db2 ~]# crontab -l
 * * * * *       sh      sns.sh
+```
+You need to setup the aws cli for this as the SNS communication to ec2 script
 
-You need to setup the aws cli
+
